@@ -1,0 +1,467 @@
+## This is an example yaml-file with parameters used to run the example-scripts for the covariance matrix generation
+
+# This is the fiducial cosmology used for PREVIOUS RAPHAEL RUNS... 
+
+pkdgrav_fid:
+  H0: 67.36
+  h: 0.6736
+  Ob0: 0.04930169233
+  Ocdm0: 0.26447041034523616
+  Om0: 0.3151918493487665
+  Omnu0: 0.0014197466735303638
+  Oncdm0: 0.0014234862778739433 # photons
+  Tcmb0: 2.726
+  Neff: 2.89 
+  m_nu: 0.02  # giving a total neutrino mass of 3 * 0.02 = 0.06 eV
+  sigma8: 0.8111
+  A_s: 2.105209331337507e-09
+  n_s: 0.9649
+  tau: 0.051 #according to https://www.aanda.org/articles/aa/pdf/2020/11/aa38073-20.pdf;  old value according to above paper = 0.0544
+  YHe: 0.2454006
+  w: -1
+  # for class- this is completely wrong: we cant have 3 ncdm species and 2.03 ur species....
+  #from CLASS explanatory.ini this should be: 0.00441
+  # N_ur: 2.03066666667
+  N_ur: 0.00441
+  N_ncdm: 3
+  A_IA: 0.973 
+  b_lowz: 1.837
+  b_cmass: 2.086
+#Kids 450 result for A_IA? -- more correct to vry it in analysis 
+
+cosmogrid_fiducial: 
+  h: 0.6736
+  Om: 0.26
+  Ob: 0.0493
+  Oc: 0.2107
+  ns: 0.9649
+  m_nu: 0.02
+  s8: 0.84
+  tau: 0.054
+  bl: 1.837
+  bc: 2.086
+
+cosmogrid_fiducial: 
+  h: 0.6736
+  Om: 0.26
+  Ob: 0.0493
+  Oc: 0.2107
+  ns: 0.9649
+  m_nu: 0.02
+  s8: 0.84
+  tau: 0.054
+  bl: 1.837
+  bc: 2.086
+
+high_mnu_fiducial: 
+  h: 0.6736
+  Om: 0.26
+  Ob: 0.0493
+  Oc: 0.2107
+  ns: 0.9649
+  m_nu: 0.02
+  s8: 0.84
+  tau: 0.054
+  bl: 1.837
+  bc: 2.086
+
+cosmogrid_fiducial_theta: 
+  h: 0.6736
+  Ob: 0.0493
+  Oc: 0.2107
+  s8: 0.84
+  ns: 0.9649
+  tau: 0.054
+  m_nu: 0.02
+
+cosmogrid_fiducial_emu_theta: 
+  h: 0.6736
+  ob: 0.022369232
+  Om: 0.26
+  s8: 0.84
+  ns: 0.9649
+  tau: 0.054
+  m_nu: 0.02
+  IA: 0.0
+  bl: 1.837
+  bc: 2.086
+
+
+best_fit:
+  H0: 65.9
+  h: 0.659
+  Ob0: 0.0529
+  Ocdm0: 0.2611
+  Om0: 0.314
+  Omnu0: 0.0014197466735303638
+  Oncdm0: 0.0014234862778739433 # photons
+  Tcmb0: 2.726
+  Neff: 2.89
+  m_nu: 0.225  # giving a total neutrino mass of 3 * 0.02 = 0.06 eV
+  sigma8: 0.716
+  A_s: 2.105209331337507e-09
+  n_s: 0.9874
+  tau: 0.051 #according to https://www.aanda.org/articles/aa/pdf/2020/11/aa38073-20.pdf;  old value according to above paper = 0.0544
+  YHe: 0.2454006
+  w: -1
+  # for class
+  N_ur: 2.03066666667
+  N_ncdm: 3
+  A_IA: 0.973
+  b_lowz: 2.32
+  b_cmass: 2.27
+
+UFalcon_specs:
+  Nsample: 1024 # no. of particles per cube-side
+  Nmesh : 1024
+  Lbox: 1120 # boxsize in Mpc/h      (!!)
+  dz: 0.01
+  nside: 1024
+  z1_cmb: 0.0
+  z2_cmb: 1.75
+  zs_cmb: 1090.0
+  z1_kids: 0.0
+  z2_kids: 1.75
+  z1_boss: 0.0
+  z2_boss: 1.75
+  c: 299792.458
+  ma_scheme: 'CIC'
+  int_scheme: 'linear'
+  nz_type: 'kids'   #also include des, smail,...
+
+nside: 1024
+ltrunc: 3000
+
+# cosmology configuration (more cosmological parameters can be inserted here)
+#Here, best-fit parameters from the baseline Planck 2018 LCDM model
+#using base_plikHM_TTTEEE_lowl_lowE_lensing (from planck_2018.ini in CAMB)
+class_planck_fid:
+  H0: 67.32117
+  h: 0.6732117
+  omega_b: 0.02238280 #this is Omega * h^2
+  omega_cdm: 0.1201075 #this is Omega * h^2
+  omega_ncdm: 0.0006451439 #this is Omega * h^2
+  A_s: 2.100549e-09
+  sigma8: 0.8117660760507666
+  n_s: 0.9660499
+  YHe: 0.2454006
+  tau_reio: 0.05430842
+  N_ur: 2.03066666667
+  N_ncdm: 1
+  Tcmb0: 2.726
+  m_nu: 0.06
+
+
+setup_nontomo_cross:
+  path2wsp: '/cluster/work/refregier/alexree/combined_probes/combined_probes_data/masks/pymaster_workspace'
+  nside: 1024
+  spectra: {'tt', 'ee', 'te', 'kk', 'll', 'cc', 'kt', 'ct', 'lt', 'lk', 'ck', 'gg_11', 'gg_12', 'gg_13', 'gg_14', 'gg_15', 'gg_22', 'gg_23', 'gg_24', 'gg_25', 'gg_33', 'gg_34', 'gg_35', 'gg_44', 'gg_45', 'gg_55', 'tg_1', 'tg_2', 'tg_3', 'tg_4', 'tg_5', 'kg_1', 'kg_2', 'kg_3', 'kg_4', 'kg_5', 'cg_1', 'cg_2', 'cg_3', 'cg_4', 'cg_5', 'lg_1', 'lg_2', 'lg_3', 'lg_4', 'lg_5'} # 46 spectra
+  ufalc_spectra: {'kk', 'll', 'cc', 'kt', 'ct', 'lt', 'lk', 'ck', 'gg_11', 'gg_12', 'gg_13', 'gg_14', 'gg_15', 'gg_22', 'gg_23', 'gg_24', 'gg_25', 'gg_33', 'gg_34', 'gg_35', 'gg_44', 'gg_45', 'gg_55', 'tg_1', 'tg_2', 'tg_3', 'tg_4', 'tg_5', 'kg_1', 'kg_2', 'kg_3', 'kg_4', 'kg_5', 'cg_1', 'cg_2', 'cg_3', 'cg_4', 'cg_5', 'lg_1', 'lg_2', 'lg_3', 'lg_4', 'lg_5'} # 43 spectra
+  final_spectra: {'gg_11', 'gg_12', 'gg_13', 'gg_14', 'gg_15', 'gg_22', 'gg_23', 'gg_24', 'gg_25', 'gg_33', 'gg_34', 'gg_35', 'gg_44', 'gg_45', 'gg_55','ll', 'cc', 'kt', 'ct', 'lt', 'lk', 'ck', 'tg_3', 'tg_4', 'tg_5', 'kg_1', 'kg_2', 'kg_3', 'kg_4', 'kg_5', 'cg_4', 'cg_5', 'lg_3', 'lg_4', 'lg_5', 'tt', 'ee', 'te'} # 43 spectra
+  # autos
+  #Note for CMB we are now using LINEAR BINNING 
+
+  tt_n_bin: 215
+  ee_n_bin: 199
+  te_n_bin: 199
+
+  kk_lmin: 30
+  kk_lmax: 400
+  kk_n_bin: 7
+  kk_f_sky : 0.671 # fsky used in the planck18 lensing paper
+
+  ll_lmin: 30
+  ll_lmax: 110
+  ll_n_bin: 5
+
+  cc_lmin: 30
+  cc_lmax: 210
+  cc_n_bin: 7
+
+  gg_11_lmin: 100
+  gg_11_lmax: 1500
+  gg_11_n_bin: 8
+
+  gg_22_lmin: 100
+  gg_22_lmax: 1500
+  gg_22_n_bin: 8
+
+  gg_33_lmin: 100
+  gg_33_lmax: 1500
+  gg_33_n_bin: 8
+
+  gg_44_lmin: 100
+  gg_44_lmax: 1500
+  gg_44_n_bin: 8
+
+  gg_55_lmin: 100
+  gg_55_lmax: 1500
+  gg_55_n_bin: 8
+
+  #  crosses
+
+  kt_lmin: 20
+  kt_lmax: 120
+  kt_n_bin: 6
+
+  ct_lmin: 20
+  ct_lmax: 70
+  ct_n_bin: 5
+
+  lt_lmin: 20
+  lt_lmax: 70
+  lt_n_bin: 5
+
+  lk_lmin: 30
+  lk_lmax: 110
+  lk_n_bin: 6
+
+  ck_lmin: 30
+  ck_lmax: 210
+  ck_n_bin: 6
+
+  gg_12_lmin: 100
+  gg_12_lmax: 1500
+  gg_12_n_bin: 8
+
+  gg_13_lmin: 100
+  gg_13_lmax: 1500
+  gg_13_n_bin: 8
+
+  gg_14_lmin: 100
+  gg_14_lmax: 1500
+  gg_14_n_bin: 8
+
+  gg_15_lmin: 100
+  gg_15_lmax: 1500
+  gg_15_n_bin: 8
+
+  gg_23_lmin: 100
+  gg_23_lmax: 1500
+  gg_23_n_bin: 8
+
+  gg_24_lmin: 100
+  gg_24_lmax: 1500
+  gg_24_n_bin: 8
+
+  gg_25_lmin: 100
+  gg_25_lmax: 1500
+  gg_25_n_bin: 8
+
+  gg_34_lmin: 100
+  gg_34_lmax: 1500
+  gg_34_n_bin: 8
+
+  gg_35_lmin: 100
+  gg_35_lmax: 1500
+  gg_35_n_bin: 8
+
+  gg_45_lmin: 100
+  gg_45_lmax: 1500
+  gg_45_n_bin: 8
+
+  tg_1_lmin: 20
+  tg_1_lmax: 90
+  tg_1_n_bin: 4
+
+  tg_2_lmin: 20
+  tg_2_lmax: 90
+  tg_2_n_bin: 4
+
+  tg_3_lmin: 20
+  tg_3_lmax: 90
+  tg_3_n_bin: 4
+
+  tg_4_lmin: 20
+  tg_4_lmax: 90
+  tg_4_n_bin: 4
+
+  tg_5_lmin: 20
+  tg_5_lmax: 90
+  tg_5_n_bin: 4
+
+  kg_1_lmin: 30
+  kg_1_lmax: 400
+  kg_1_n_bin: 7
+
+  kg_2_lmin: 30
+  kg_2_lmax: 400
+  kg_2_n_bin: 7
+
+  kg_3_lmin: 30
+  kg_3_lmax: 400
+  kg_3_n_bin: 7
+
+  kg_4_lmin: 30
+  kg_4_lmax: 400
+  kg_4_n_bin: 7
+
+  kg_5_lmin: 30
+  kg_5_lmax: 400
+  kg_5_n_bin: 7
+
+  cg_1_lmin: 30
+  cg_1_lmax: 210
+  cg_1_n_bin: 6
+
+  cg_2_lmin: 30
+  cg_2_lmax: 210
+  cg_2_n_bin: 6
+
+  cg_3_lmin: 30
+  cg_3_lmax: 210
+  cg_3_n_bin: 6
+
+  cg_4_lmin: 30
+  cg_4_lmax: 210
+  cg_4_n_bin: 6
+
+  cg_5_lmin: 30
+  cg_5_lmax: 210
+  cg_5_n_bin: 6
+
+  lg_1_lmin: 30
+  lg_1_lmax: 110
+  lg_1_n_bin: 6
+
+  lg_2_lmin: 30
+  lg_2_lmax: 110
+  lg_2_n_bin: 6
+
+  lg_3_lmin: 30
+  lg_3_lmax: 110
+  lg_3_n_bin: 6
+
+  lg_4_lmin: 30
+  lg_4_lmax: 110
+  lg_4_n_bin: 6
+
+  lg_5_lmin: 30
+  lg_5_lmax: 110
+  lg_5_n_bin: 6
+
+
+gamma_kids_setup:
+  nside: 1024
+  lmin: 100
+  lmax: 1000
+  n_bin: 5 # number of bins for logarithmic binning
+
+
+kk_setup:
+  f_sky : 0.671 # fsky used in the planck18 lensing paper
+
+
+emulator_indices_wl: 
+  gg_11_low: 0
+  gg_11_high: 8
+
+  gg_12_low: 8
+  gg_12_high: 16
+
+  gg_13_low: 16
+  gg_13_high: 24
+
+  gg_14_low: 24
+  gg_14_high: 32
+
+  gg_15_low: 32
+  gg_15_high: 40
+
+  gg_22_low: 40
+  gg_22_high: 48
+
+  gg_23_low: 48
+  gg_23_high: 56
+
+  gg_24_low: 56
+  gg_24_high: 64
+
+  gg_25_low: 64
+  gg_25_high: 72
+
+  gg_33_low: 72
+  gg_33_high: 80
+
+  gg_34_low: 80
+  gg_34_high: 88
+
+  gg_35_low: 88
+  gg_35_high: 96
+
+  gg_44_low: 96
+  gg_44_high: 104
+
+  gg_45_low: 104
+  gg_45_high: 112
+
+  gg_55_low: 112
+  gg_55_high: 120
+
+emulator_indices_lss:
+
+  ll_low: 0
+  ll_high: 5
+
+  cc_low: 5
+  cc_high: 12
+
+  lg_3_low: 12
+  lg_3_high: 18
+
+  lg_4_low: 18
+  lg_4_high: 24
+
+  lg_5_low: 24
+  lg_5_high: 30
+
+  cg_4_low: 30
+  cg_4_high: 36
+
+  cg_5_low: 36
+  cg_5_high: 42
+
+  lk_low: 42
+  lk_high: 48
+
+  ck_low: 48
+  ck_high: 54
+
+  kg_1_low: 54
+  kg_1_high: 61
+
+  kg_2_low: 61
+  kg_2_high: 68
+
+  kg_3_low: 68
+  kg_3_high: 75
+
+  kg_4_low: 75
+  kg_4_high: 82
+
+  kg_5_low: 82
+  kg_5_high: 89
+
+  tg_3_low: 89
+  tg_3_high: 93
+
+  tg_4_low: 93
+  tg_4_high: 97
+
+  tg_5_low: 97
+  tg_5_high: 101
+
+  lt_low: 101
+  lt_high: 106
+
+  ct_low: 106
+  ct_high: 111
+
+  kk_low: 111
+  kk_high: 118
+
+  kt_low: 118
+  kt_high: 124
+
+
+
