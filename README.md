@@ -28,7 +28,7 @@ Please feel free to contribute to this project! It would be great to add in othe
 
 ## Credits 
 
-Thw code in this repository takes inspiration from a number of previous works. In particular we use funtions from the $\texttt{ChaosHammer}$ package for running the emulator-accelerated MCMC (see [chaoshammer]https://arxiv.org/abs/2207.01627) and we follow the Python implementations of the Planck primary CMB TTTEEE likelihoods both [high-$\ell$](https://github.com/heatherprince/planck-lite-py) and [low-$\ell$](https://github.com/heatherprince/planck-low-py) described in these associated papers [paper1]https://arxiv.org/abs/1909.05869 and [paper2]https://arxiv.org/abs/2104.05715. Finally, for the emulators in this example we use the $\texttt{cosmopower}$ [framework](https://arxiv.org/abs/2106.03846) available here: [cosmopower]https://github.com/alessiospuriomancini/cosmopower. 
+Thw code in this repository takes inspiration from a number of previous works. In particular we use funtions from the $\texttt{ChaosHammer}$ package for running the emulator-accelerated MCMC (see [chaoshammer_paper](https://arxiv.org/abs/2207.01627)) and we follow the Python implementations of the Planck primary CMB TTTEEE likelihoods both [high-$\ell$](https://github.com/heatherprince/planck-lite-py) and [low-$\ell$](https://github.com/heatherprince/planck-low-py) described in these associated papers [paper1](https://arxiv.org/abs/1909.05869) and [paper2](https://arxiv.org/abs/2104.05715). Finally, for the emulators in this example we use the $\texttt{cosmopower}$ [framework](https://arxiv.org/abs/2106.03846) available here: [cosmopower](https://github.com/alessiospuriomancini/cosmopower). 
 
 ---
 
