@@ -1,41 +1,30 @@
 # Project Name
 
-![Project Banner or Visual](link-to-image)
+![Project Banner or Visual](./logo.png)
 
-> A short description of what your project does. Make it snappy!
+A planck PR3 compressed CMB TTTEEE likelihood and emulator-acceleraterated sampler. 
 
 ## Table of Contents
-- [Installation](#installation)
 - [Usage](#usage)
 - [Support](#support)
 - [Contributing](#contributing)
 
-## Installation
-
-Describe how to install your project. If necessary, you can provide code blocks or terminal commands:
-
-\```bash
-pip install your-project-name
-\```
 
 ## Usage
 
-Describe how to use your project. Provide examples:
+* The best way to get started with this compressed likelihood is by runing the example_notebook.ipynb provided. This is a self-contained application which makes use of the emcee sampler in run_mcmc_with_sampler.py to produce compressed Planck18 CMB TTTEEE + Lensing contours.
 
-\```python
-import YourModule
+* If you are only interested in the MOPED compression vectors these are stored under ./data/moped_compression_vecs there are one set for the CMB lensing and a separate set for the CMB primary TTTEEE
 
-result = YourModule.some_function()
-print(result)
-\```
+* The compression vectors are stored as 2D numpy arrays which represent the compression vectors for each of the parameters stacked together in the same order as the name of the files. 
 
 ## Support
 
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+Feel free to reach out at areeves@phys.ethz.ch if you have any questions.
 
 ## Contributing
 
-Let people know how they can contribute into your project. A contributing guideline will be a big plus.
+Please feel free to contribute to this project! It would be great to add in other compressed likelihoods!
 
 ---
 
