@@ -11,8 +11,8 @@ import chaospy
 import yaml
 from tqdm.auto import tqdm, trange
 import os
-import logging 
-import sys 
+import logging
+import sys
 
 
 warnings.filterwarnings("ignore", category=DeprecationWarning)
@@ -421,10 +421,6 @@ def _run_mcmc(
         o_nu = m_nu * 3 / 93.14
 
         omega_cdm = (omega_m*h*h) - o_nu - omega_b
-
-        # remove omega_m
-        # emu_dict.pop("omega_m", None)
-
         emu_dict["omega_cdm"] = omega_cdm
 
         return emu_dict
@@ -483,8 +479,6 @@ def _run_mcmc(
         return Dl_bin
 
     def lognormal(x, mu, sig, loc=0):
-        # if x-loc==0:
-        #     return np.zeros_like(x)
 
         LN = (
             1
@@ -539,7 +533,7 @@ def _run_mcmc(
         ells=None,
         indices_list=None,
         compression_vectors_list=None,
-        compression_vectors_list_lss_full=None, 
+        compression_vectors_list_lss_full=None,
         compression_vectors_list_lensing=None,
         bump_vector=None,
         lognorm_list=None,
@@ -603,8 +597,7 @@ def _run_mcmc(
             #corr_lens is the constant term that is the second half of question 29
 
             # Define the minimum and maximum ell values to be binned
-            # ell_min = 8
-            # ell_max = 400 #this is inclusive! Hence +1 below
+
             ell_min = 2
             ell_max = 2500
 
@@ -715,7 +708,6 @@ def _run_mcmc(
 
 
         if emu_cmb_list is not None:
-
 
             if cmb_experiment == 'planck':
                 units_factor = 1e12
@@ -833,22 +825,6 @@ def _run_mcmc(
 
                 Cl = np.hstack((Cltt, Clte, Clee))
 
-                test = False
-
-                if test:
-                    LOGGER.info("adding test point to last point")
-                    cl_tt = np.load(
-                        "/cluster/work/refregier/alexree/combined_probes/mcmc/planck_compression_tests/test_tt.npy"
-                    )
-                    cl_te = np.load(
-                        "/cluster/work/refregier/alexree/combined_probes/mcmc/planck_compression_tests/test_te.npy"
-                    )
-                    cl_ee = np.load(
-                        "/cluster/work/refregier/alexree/combined_probes/mcmc/planck_compression_tests/test_ee.npy"
-                    )
-                    concat_test = np.hstack((cl_tt, cl_te, cl_ee))
-                    Cl[-1, :] = concat_test
-
                 Cl_bin = np.array(
                     [
                         np.bincount(indices_rep, weights=Cl[index, indices] * window_ttteee)
@@ -873,83 +849,6 @@ def _run_mcmc(
 
                 loglkl = -0.5 * chi2
 
-                if test:
-                    LOGGER.info("TESTED LIKELIHOOD")
-                    LOGGER.info("got: {}".format(loglkl[-1]))
-                    LOGGER.info("expected: {}".format(-291.33481235418026))
-
-            elif cmb_experiment == 'act':
-                #The ACT DR4 likelihood for CMB primary TTTEEE wide and deep fields
-
-                #Is this units factor still correct? You should try to double check this by plotting the data
-                #against a prediction from the emulator and trying to mathc the magntitudes!
-                units_factor = 1e12
-
-                # transform the p array into an array that is compatible with the cosmopower emulators
-                # Dont touch this part
-                assert (
-                    nuisance_params is not False
-                ), "ACT likelihood requires yp2 nuisance"
-
-                params_dict = transform_to_dict(p[select], dtype, nuisance_params)
-                names = [dtype[i][0] for i in range(len(dtype))]
-                if "omega_cdm" not in names:
-                    params_dict = convert_om_to_ocdm(params_dict)
-
-                tt_emu_model, te_emu_model, ee_emu_model = emu_cmb_list
-                # sourcing C_ells from CosmoPower- IMPORTANT! Are these how this should be called in your case?
-                #Do you need to take the exp or not?
-
-                Cltt = np.exp(tt_emu_model.predictions_np(params_dict)) * units_factor
-                Clte = te_emu_model.predictions_np(params_dict) * units_factor
-                Clee = np.exp(ee_emu_model.predictions_np(params_dict)) * units_factor
-
-                #Harcoded bmax, lmax_win from https://github.com/ACTCollaboration/pyactlike/blob/master/pyactlike/like.py
-                nbin=260,  # total bins
-                nbinw=130,  # total bins in single patch
-                nbintt=40,
-                nbinte=45,
-                nbinee=45,
-                lmax_win=7925,  # total ell in window functions
-                bmax_win=520,  # total bins in window functions
-                bmax=52
-
-                #loading in the things we need for binning and covariance matrix (should be passed where likelihood is called)
-                win_func_d, win_func_w, fisher, X_data = act_data
-
-                #The code here to do the binning might not work of the box as cltt/clee/clte are 2D arrays!
-                #Might Need to update binning such that we can apply the binning matrix to a 2D array all at once
-                cl_tt_d = win_func_d[2 * bmax : 3 * bmax, 1:lmax_win] @ cltt[1:lmax_win]
-                cl_te_d = win_func_d[6 * bmax : 7 * bmax, 1:lmax_win] @ clte[1:lmax_win]
-                cl_ee_d = win_func_d[9 * bmax : 10 * bmax, 1:lmax_win] @ clee[1:lmax_win]
-                # use 150x150 windows
-                cl_tt_w = win_func_w[2 * bmax : 3 * bmax, 1:lmax_win] @ cltt[1:lmax_win]
-                cl_te_w = win_func_w[6 * bmax : 7 * bmax, 1:lmax_win] @ clte[1:lmax_win]
-                cl_ee_w = win_func_w[9 * bmax : 10 * bmax, 1:lmax_win] @ clee[1:lmax_win]
-
-                X_model = np.zeros(nbin)
-                X_model[:nbintt] = cl_tt_d[b0 : b0 + nbintt]  # TT
-                X_model[nbintt : nbintt + nbinte] = cl_te_d[:nbinte] * yp2  # TE
-                X_model[nbintt + nbinte : nbintt + nbinte + nbinee] = (
-                    cl_ee_d[:nbinee] * yp2 * yp2
-                )  # EE
-                X_model[nbintt + nbinte + nbinee : 2 * nbintt + nbinte + nbinee] = cl_tt_w[
-                    b0 : b0 + nbintt
-                ]  # TT
-                X_model[2 * nbintt + nbinte + nbinee : 2 * nbintt + 2 * nbinte + nbinee] = (
-                    cl_te_w[:nbinte] * yp2
-                )  # TE
-                X_model[
-                    2 * nbintt + 2 * nbinte + nbinee : 2 * nbintt + 2 * nbinte + 2 * nbinee
-                ] = (
-                    cl_ee_w[:nbinee] * yp2 * yp2
-                )  # EE
-
-                Y = X_data - X_model
-
-                ptemp = np.dot(fisher, Y)
-
-                loglkl = -0.5 * np.sum(ptemp * diff_vec)
 
 
             like[select] += loglkl
@@ -957,13 +856,6 @@ def _run_mcmc(
             test_lognorm = False
 
             if lognorm_list is not None:
-                if test_lognorm:
-                    Cls_2_to_29 = np.genfromtxt(
-                        "/cluster/work/refregier/alexree/planck-low-py/data/example_Cl.txt",
-                        names=True,
-                    )
-                    cl_tt_test = Cls_2_to_29["TT"]
-                    cl_ee_test = Cls_2_to_29["EE"]
 
                 for i in range(len(lognorm_list)):
                     spec, data_lowl = lognorm_list[i]
@@ -995,14 +887,6 @@ def _run_mcmc(
                             lmax_list_EE,
                         )
 
-                        if test_lognorm:
-                            LOGGER.info(
-                                "tested lowl ee got: {}, expected: {}".format(
-                                    lognorm_ee[-1], 9.656235151568294
-                                )
-                            )
-                        like[select] += lognorm_ee
-
                     elif spec == "tt":
                         Cls_tt_2_29 = Cltt[:, 0:28]
 
@@ -1012,15 +896,6 @@ def _run_mcmc(
                         lognorm_tt = planck_lowT_binned_loglike(
                             Cls_tt_2_29, mu_LN_TT, sig_LN_TT, lmin_list_TT, lmax_list_TT
                         )
-
-                        if test_lognorm:
-                            LOGGER.info(
-                                "tested lowl ee got: {}, expected: {}".format(
-                                    lognorm_tt[-1], -11.660801515314658
-                                )
-                            )
-
-                        like[select] += lognorm_tt
 
                     else:
                         raise (

@@ -1,8 +1,8 @@
-# Project Name
+# planck_compressed
 
 ![Project Banner or Visual](./logo.png)
 
-A planck PR3 compressed CMB TTTEEE likelihood and emulator-acceleraterated sampler. 
+A planck PR3 compressed CMB TTTEEE likelihood and example emulator-acceleraterated sampler.
 
 ## Table of Contents
 - [Usage](#usage)
@@ -16,7 +16,7 @@ A planck PR3 compressed CMB TTTEEE likelihood and emulator-acceleraterated sampl
 
 * If you are only interested in the MOPED compression vectors these are stored under ./data/moped_compression_vecs there are one set for the CMB lensing and a separate set for the CMB primary TTTEEE
 
-* The compression vectors are stored as 2D numpy arrays which represent the compression vectors for each of the parameters stacked together in the same order as the name of the files. 
+* The compression vectors are stored as 2D numpy arrays which represent the compression vectors for each of the parameters vertically stacked together in the same order as the name of the files.
 
 ## Support
 
