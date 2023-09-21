@@ -887,6 +887,8 @@ def _run_mcmc(
                             lmax_list_EE,
                         )
 
+                        like[select] += lognorm_ee
+
                     elif spec == "tt":
                         Cls_tt_2_29 = Cltt[:, 0:28]
 
@@ -897,10 +899,13 @@ def _run_mcmc(
                             Cls_tt_2_29, mu_LN_TT, sig_LN_TT, lmin_list_TT, lmax_list_TT
                         )
 
+                        like[select] += lognorm_tt
+
                     else:
                         raise (
                             Exception("ONLY PLANCK LOW TT AND PLANCK LOW EE supported")
                         )
+
 
         gaussian_add = np.zeros_like(like[select])
 

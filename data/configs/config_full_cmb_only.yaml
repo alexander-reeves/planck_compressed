@@ -122,6 +122,5 @@ nz_g:
 
 use_classyobs: True
 
-CMBONLY: False
-LENSONLY: True
+CMBONLY: True
 
